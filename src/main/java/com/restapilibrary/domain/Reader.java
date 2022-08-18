@@ -16,19 +16,21 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Reader {
 
     @Id
     @GeneratedValue
-    private Long bookId;
+    private Long readerId;
 
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "NAME")
+    private String name;
 
-    @Column(name = "AUTHOR")
-    private String author;
+    @Column(name = "SURNAME")
+    private String surname;
 
-    @Column(name = "PUBLICATION_YEAR")
-    private LocalDate publicationYear;
+    @Column(name = "ACCOUNT_DATE")
+    private LocalDate accountCreationDate;
 
 }
+
+

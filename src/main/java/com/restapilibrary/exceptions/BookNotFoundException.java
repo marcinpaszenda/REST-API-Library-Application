@@ -1,4 +1,4 @@
-package com.restapilibrary.controller;
+package com.restapilibrary.exceptions;
 
 public class BookNotFoundException extends Exception {
 
