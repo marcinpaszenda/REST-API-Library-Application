@@ -1,25 +1,22 @@
 package com.restapilibrary.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Book {
 
     @Id
     @GeneratedValue
+    @Column(name = "BOOK_ID", unique = true)
     private Long bookId;
 
     @Column(name = "TITLE")
@@ -31,4 +28,19 @@ public class Book {
     @Column(name = "PUBLICATION_YEAR")
     private LocalDate publicationYear;
 
+//    @OneToMany(
+//            targetEntity = BookCopy.class,
+//            mappedBy = "book",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER
+//    )
+//    private List<BookCopy> bookCopyList = new ArrayList<>();
+
+    public Book(Long bookId, String title, String author, LocalDate publicationYear) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
 }
+

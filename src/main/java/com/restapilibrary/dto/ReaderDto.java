@@ -1,4 +1,4 @@
-package com.restapilibrary.domain;
+package com.restapilibrary.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

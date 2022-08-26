@@ -1,7 +1,7 @@
 package com.restapilibrary.controller;
 
 import com.restapilibrary.domain.Reader;
-import com.restapilibrary.domain.ReaderDto;
+import com.restapilibrary.dto.ReaderDto;
 import com.restapilibrary.exceptions.ReaderNotFoundException;
 import com.restapilibrary.mapper.ReaderMapper;
 import com.restapilibrary.service.ReaderService;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

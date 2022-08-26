@@ -1,7 +1,7 @@
 package com.restapilibrary.controller;
 
 import com.restapilibrary.domain.Book;
-import com.restapilibrary.domain.BookDto;
+import com.restapilibrary.dto.BookDto;
 import com.restapilibrary.exceptions.BookNotFoundException;
 import com.restapilibrary.mapper.BookMapper;
 import com.restapilibrary.service.BookService;
@@ -27,8 +27,8 @@ public class BookController {
         return ResponseEntity.ok(bookMapper.mapToBookDtoList(books));
     }
 
-    @GetMapping("/{bookId}")
-    public ResponseEntity <BookDto> getBook(@PathVariable Long bookId) throws BookNotFoundException {
+    @GetMapping("{bookId}")
+    public ResponseEntity<BookDto> getBook(@PathVariable Long bookId) throws BookNotFoundException {
         return ResponseEntity.ok(bookMapper.mapToBookDto(bookService.findBookById(bookId)));
     }
 

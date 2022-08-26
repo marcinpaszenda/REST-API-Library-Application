@@ -5,17 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Reader {
 
     @Id
@@ -31,6 +30,20 @@ public class Reader {
     @Column(name = "ACCOUNT_DATE")
     private LocalDate accountCreationDate;
 
+//    @OneToMany(
+//            targetEntity = Borrowing.class,
+//            mappedBy = "reader",
+//            cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER
+//    )
+//    private List<Borrowing> borrowingList = new ArrayList<>();
+
+    public Reader(Long readerId, String name, String surname, LocalDate accountCreationDate) {
+        this.readerId = readerId;
+        this.name = name;
+        this.surname = surname;
+        this.accountCreationDate = accountCreationDate;
+    }
 }
 
 

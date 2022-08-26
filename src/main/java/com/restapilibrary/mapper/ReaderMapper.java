@@ -1,7 +1,7 @@
 package com.restapilibrary.mapper;
 
 import com.restapilibrary.domain.Reader;
-import com.restapilibrary.domain.ReaderDto;
+import com.restapilibrary.dto.ReaderDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
