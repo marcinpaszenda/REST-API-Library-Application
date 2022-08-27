@@ -1,9 +1,12 @@
 package com.restapilibrary.controller;
 
+import com.restapilibrary.domain.BookCopy;
 import com.restapilibrary.domain.Reader;
 import com.restapilibrary.dto.ReaderDto;
 import com.restapilibrary.exceptions.ReaderNotFoundException;
 import com.restapilibrary.mapper.ReaderMapper;
+import com.restapilibrary.repository.BookCopyRepository;
+import com.restapilibrary.repository.ReaderRepository;
 import com.restapilibrary.service.ReaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +17,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +26,8 @@ public class ReaderController {
 
     private final ReaderService readerService;
     private final ReaderMapper readerMapper;
+    private final ReaderRepository readerRepository;
+    private final BookCopyRepository bookCopyRepository;
 
 
     @GetMapping
@@ -54,6 +60,16 @@ public class ReaderController {
         readerMapper.mapToReaderDto(updateReader);
         return ResponseEntity.ok().body(readerDto);
     }
+
+    @PutMapping("/{readerId}/bookCopies/{bookCopyId}")
+    public Reader assignReaderToBookCopy(@PathVariable Long readerId, @PathVariable Long bookCopyId) {
+        Reader reader = readerRepository.findById(readerId).get();
+        BookCopy bookCopy = bookCopyRepository.findById(bookCopyId).get();
+        reader.addBookCopy(bookCopy);
+        return readerRepository.save(reader);
+    }
+
+
 
     @DeleteMapping(value = "{readerId}")
     public ResponseEntity<Void> deleteReader(@PathVariable Long readerId) throws ReaderNotFoundException {

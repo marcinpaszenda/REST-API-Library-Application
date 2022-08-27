@@ -1,5 +1,6 @@
 package com.restapilibrary.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,19 +31,25 @@ public class Reader {
     @Column(name = "ACCOUNT_DATE")
     private LocalDate accountCreationDate;
 
-//    @OneToMany(
-//            targetEntity = Borrowing.class,
-//            mappedBy = "reader",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER
-//    )
-//    private List<Borrowing> borrowingList = new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "reader_bookCopy",
+            joinColumns = @JoinColumn(name = "reader_id"),
+            inverseJoinColumns = @JoinColumn(name = "bookCopy_id")
+    )
+    private List<BookCopy> bookCopyList = new ArrayList<>();
+
 
     public Reader(Long readerId, String name, String surname, LocalDate accountCreationDate) {
         this.readerId = readerId;
         this.name = name;
         this.surname = surname;
         this.accountCreationDate = accountCreationDate;
+    }
+
+    public void addBookCopy(BookCopy bookCopy) {
+        bookCopyList.add(bookCopy);
     }
 }
 
