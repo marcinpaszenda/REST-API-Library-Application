@@ -1,5 +1,6 @@
 package com.restapilibrary.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @Id
@@ -28,19 +29,15 @@ public class Book {
     @Column(name = "PUBLICATION_YEAR")
     private LocalDate publicationYear;
 
-//    @OneToMany(
-//            targetEntity = BookCopy.class,
-//            mappedBy = "book",
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.EAGER
-//    )
-//    private List<BookCopy> bookCopyList = new ArrayList<>();
+    @OneToMany(
+            targetEntity = BookCopy.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<BookCopy> bookCopyList = new ArrayList<>();
 
-    public Book(Long bookId, String title, String author, LocalDate publicationYear) {
-        this.bookId = bookId;
-        this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-    }
+
+
 }
 

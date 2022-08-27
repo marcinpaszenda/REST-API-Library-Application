@@ -4,6 +4,8 @@ import com.restapilibrary.domain.Book;
 import com.restapilibrary.dto.BookDto;
 import com.restapilibrary.exceptions.BookNotFoundException;
 import com.restapilibrary.mapper.BookMapper;
+import com.restapilibrary.repository.BookCopyRepository;
+import com.restapilibrary.repository.BookRepository;
 import com.restapilibrary.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,8 @@ public class BookController {
 
     private final BookService bookService;
     private final BookMapper bookMapper;
+    private final BookCopyRepository bookCopyRepository;
+    private final BookRepository bookRepository;
 
     @GetMapping
     public ResponseEntity<List<BookDto>> getAllBooks() {

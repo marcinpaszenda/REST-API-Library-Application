@@ -1,9 +1,12 @@
 package com.restapilibrary.controller;
 
+import com.restapilibrary.domain.Book;
 import com.restapilibrary.domain.BookCopy;
 import com.restapilibrary.dto.BookCopyDto;
 import com.restapilibrary.exceptions.BookCopyNotFoundException;
 import com.restapilibrary.mapper.BookCopyMapper;
+import com.restapilibrary.repository.BookCopyRepository;
+import com.restapilibrary.repository.BookRepository;
 import com.restapilibrary.service.BookCopyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,8 @@ public class BookCopyController {
 
     private final BookCopyService bookCopyService;
     private final BookCopyMapper bookCopyMapper;
+    private final BookCopyRepository bookCopyRepository;
+    private final BookRepository bookRepository;
 
     @GetMapping
     public ResponseEntity<List<BookCopyDto>> getAllBookCopies() {
@@ -46,6 +51,14 @@ public class BookCopyController {
         BookCopy updatedBookCopy = bookCopyService.updateBookCopy(bookCopy);
         bookCopyMapper.mapToBookCopyDto(updatedBookCopy);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{bookCopyId}/books/{bookId}")
+    BookCopy assignBookToBookCopy(@PathVariable Long bookCopyId, @PathVariable Long bookId) {
+        BookCopy bookCopy = bookCopyRepository.findById(bookCopyId).get();
+        Book book = bookRepository.findById(bookId).get();
+        bookCopy.setBook(book);
+        return bookCopyRepository.save(bookCopy);
     }
 
     @DeleteMapping(value = "{bookCopyId}")

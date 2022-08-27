@@ -11,6 +11,9 @@ import lombok.Setter;
 public class BookCopyDto {
 
     private Long bookCopyId;
-//    private Long bookId;
+    private Long bookId;
     private BookStatus bookStatus;
+
+
+
 }
