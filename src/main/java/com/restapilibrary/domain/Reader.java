@@ -15,7 +15,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Reader {
 
     @Id
@@ -40,6 +40,13 @@ public class Reader {
     )
     private List<BookCopy> bookCopyList = new ArrayList<>();
 
+    @OneToMany(
+            targetEntity = Borrowing.class,
+            mappedBy = "reader",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Borrowing> borrowingList = new ArrayList<>();
 
     public Reader(Long readerId, String name, String surname, LocalDate accountCreationDate) {
         this.readerId = readerId;

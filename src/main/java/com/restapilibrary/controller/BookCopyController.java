@@ -54,7 +54,7 @@ public class BookCopyController {
     }
 
     @PutMapping("/{bookCopyId}/books/{bookId}")
-    BookCopy assignBookToBookCopy(@PathVariable Long bookCopyId, @PathVariable Long bookId) {
+    public BookCopy assignBookToBookCopy(@PathVariable Long bookCopyId, @PathVariable Long bookId) {
         BookCopy bookCopy = bookCopyRepository.findById(bookCopyId).get();
         Book book = bookRepository.findById(bookId).get();
         bookCopy.setBook(book);

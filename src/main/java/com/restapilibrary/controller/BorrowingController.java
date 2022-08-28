@@ -1,9 +1,14 @@
 package com.restapilibrary.controller;
 
+import com.restapilibrary.domain.BookCopy;
 import com.restapilibrary.domain.Borrowing;
+import com.restapilibrary.domain.Reader;
 import com.restapilibrary.dto.BorrowingDto;
 import com.restapilibrary.exceptions.BorrowingNotFoundException;
 import com.restapilibrary.mapper.BorrowingMapper;
+import com.restapilibrary.repository.BookCopyRepository;
+import com.restapilibrary.repository.BorrowingRepository;
+import com.restapilibrary.repository.ReaderRepository;
 import com.restapilibrary.service.BorrowingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +25,9 @@ public class BorrowingController {
 
     private final BorrowingService borrowingService;
     private final BorrowingMapper borrowingMapper;
+    private  final BorrowingRepository borrowingRepository;
+    private final ReaderRepository readerRepository;
+    private final BookCopyRepository bookCopyRepository;
 
     @GetMapping
     public ResponseEntity<List<BorrowingDto>> getAllBorrowings() {
@@ -46,6 +54,22 @@ public class BorrowingController {
         Borrowing updatedBorrowing = borrowingService.updateBorrowing(borrowing);
         borrowingMapper.mapToBorrowingDto(updatedBorrowing);
         return ResponseEntity.ok(borrowingDto);
+    }
+
+    @PutMapping("/{borrowingId}/readers/{readerId}")
+    public Borrowing assignReaderToBorrowing(@PathVariable Long borrowingId, @PathVariable Long readerId) {
+        Borrowing borrowing = borrowingRepository.findById(borrowingId).get();
+        Reader reader = readerRepository.findById(readerId).get();
+        borrowing.setReader(reader);
+        return borrowingRepository.save(borrowing);
+    }
+
+    @PutMapping("/{borrowingId}/bookCopies/{bookCopyId}")
+    public Borrowing assignBorrowingToBookCopy(@PathVariable Long borrowingId, @PathVariable Long bookCopyId) {
+        Borrowing borrowing = borrowingRepository.findById(borrowingId).get();
+        BookCopy bookCopy = bookCopyRepository.findById(bookCopyId).get();
+        borrowing.addBookCopy(bookCopy);
+        return borrowingRepository.save(borrowing);
     }
 
     @DeleteMapping(value = "{borrowingId}")

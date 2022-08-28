@@ -1,7 +1,6 @@
 package com.restapilibrary.mapper;
 
 import com.restapilibrary.domain.Book;
-import com.restapilibrary.domain.BookCopy;
 import com.restapilibrary.dto.BookDto;
 import com.restapilibrary.repository.BookCopyRepository;
 import lombok.AllArgsConstructor;
@@ -23,10 +22,10 @@ public class BookMapper {
                 bookDto.getBookId(),
                 bookDto.getTitle(),
                 bookDto.getAuthor(),
-                bookDto.getPublicationYear(),
-                (List<BookCopy>) Optional.ofNullable(
-                        bookCopyRepository.findAllById(bookDto.getBookCopiesId()))
-                        .orElse(Collections.emptyList())
+                bookDto.getPublicationYear()
+//                (List<BookCopy>) Optional.ofNullable(
+//                        bookCopyRepository.findAllById(bookDto.getBookCopiesId()))
+//                        .orElse(Collections.emptyList())
         );
     }
 

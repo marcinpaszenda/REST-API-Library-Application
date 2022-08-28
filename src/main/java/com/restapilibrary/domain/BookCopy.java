@@ -30,10 +30,15 @@ public class BookCopy {
     @ManyToMany(mappedBy = "bookCopyList")
     private List<Reader> readerList = new ArrayList<>();
 
-    public BookCopy(Book book, BookStatus bookStatus) {
-        this.book = book;
-        this.bookStatus = bookStatus;
-    }
+    @ManyToMany(mappedBy = "bookCopyList")
+    private List<Borrowing>  borrowingList = new ArrayList<>();
+
+
+
+//    public BookCopy(Book book, BookStatus bookStatus) {
+//        this.book = book;
+//        this.bookStatus = bookStatus;
+//    }
 
     public BookCopy(BookStatus bookStatus) {
         this.bookStatus = bookStatus;

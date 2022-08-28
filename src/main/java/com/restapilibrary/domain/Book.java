@@ -37,7 +37,11 @@ public class Book {
     )
     private List<BookCopy> bookCopyList = new ArrayList<>();
 
-
-
+    public Book(Long bookId, String title, String author, LocalDate publicationYear) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
 }
 

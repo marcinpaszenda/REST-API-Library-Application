@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -68,8 +67,6 @@ public class ReaderController {
         reader.addBookCopy(bookCopy);
         return readerRepository.save(reader);
     }
-
-
 
     @DeleteMapping(value = "{readerId}")
     public ResponseEntity<Void> deleteReader(@PathVariable Long readerId) throws ReaderNotFoundException {

@@ -2,13 +2,17 @@ package com.restapilibrary.mapper;
 
 import com.restapilibrary.domain.Reader;
 import com.restapilibrary.dto.ReaderDto;
+import com.restapilibrary.repository.BorrowingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class ReaderMapper {
+
+    BorrowingRepository borrowingRepository;
 
     public Reader mapToReader(final ReaderDto readerDto) {
         return new Reader(
@@ -24,7 +28,10 @@ public class ReaderMapper {
                 reader.getReaderId(),
                 reader.getName(),
                 reader.getSurname(),
-                reader.getAccountCreationDate()
+                reader.getAccountCreationDate(),
+                reader.getBorrowingList().isEmpty()? Collections.emptyList() : reader.getBorrowingList().stream()
+                        .map(borrowing -> borrowing.getBorrowingId())
+                        .collect(Collectors.toList())
         );
     }
 
