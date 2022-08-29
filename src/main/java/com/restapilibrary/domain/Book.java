@@ -43,5 +43,11 @@ public class Book {
         this.author = author;
         this.publicationYear = publicationYear;
     }
+
+    public Book(String title, String author, LocalDate publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
 }
 
