@@ -43,4 +43,9 @@ public class BookCopy {
     public BookCopy(BookStatus bookStatus) {
         this.bookStatus = bookStatus;
     }
+
+    public BookCopy(Book book, BookStatus bookStatus) {
+        this.book = book;
+        this.bookStatus = bookStatus;
+    }
 }

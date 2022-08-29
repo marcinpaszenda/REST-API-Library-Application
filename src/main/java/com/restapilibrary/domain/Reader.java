@@ -55,6 +55,12 @@ public class Reader {
         this.accountCreationDate = accountCreationDate;
     }
 
+    public Reader(String name, String surname, LocalDate accountCreationDate) {
+        this.name = name;
+        this.surname = surname;
+        this.accountCreationDate = accountCreationDate;
+    }
+
     public void addBookCopy(BookCopy bookCopy) {
         bookCopyList.add(bookCopy);
     }

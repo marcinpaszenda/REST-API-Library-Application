@@ -45,6 +45,12 @@ public class Borrowing {
         this.dateOfReturn = dateOfReturn;
     }
 
+    public Borrowing(LocalDate dateOfBorrowing, LocalDate dateOfReturn, Reader reader) {
+        this.dateOfBorrowing = dateOfBorrowing;
+        this.dateOfReturn = dateOfReturn;
+        this.reader = reader;
+    }
+
     public void addBookCopy(BookCopy bookCopy) {
         bookCopyList.add(bookCopy);
     }
